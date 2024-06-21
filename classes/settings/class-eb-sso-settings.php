@@ -41,7 +41,7 @@ class edwiserbridge_sso_form extends moodleform {
         global $CFG;
         require_once($CFG->dirroot . '/auth/edwiserbridge/classes/class-eb-pro-license_controller.php');
         $license = new eb_pro_license_controller();
-        // if($license->get_data_from_db() == 'available'){
+        if($license->get_data_from_db() == 'available'){
             $mform ->addElement('html', '<div class="eb-auto-generate-key-container">');
             $mform->addElement(
                 'text',
@@ -118,10 +118,10 @@ class edwiserbridge_sso_form extends moodleform {
                     name="sso_submit_continue" value="' . get_string("save_cont", "auth_edwiserbridge") . '">
                 </div>'
             );
-        // } else {
-            // global $CFG;
-            // $setting_url = $CFG->wwwroot . '/auth/edwiserbridge/edwiserbridge.php?tab=summary';
-            // $mform ->addElement('html', '<p>Please activate licence from <a href="' . $setting_url . ' ">here</a> to access this setting.</p>');
-        // }
+        } else {
+            global $CFG;
+            $setting_url = $CFG->wwwroot . '/auth/edwiserbridge/edwiserbridge.php?tab=summary';
+            $mform ->addElement('html', '<p>Please activate licence from <a href="' . $setting_url . ' ">here</a> to access this setting.</p>');
+        }
     }
 }
